@@ -1,0 +1,32 @@
+<ng-container *ngIf="drinkItem$ | async as drink">
+  <vega-flex alignItem="center">
+    <div class="v-text-center M:v-text-left vega-flex-basis-0 vega-flex-grow">
+      <img
+        src="{{ drink.imageUrl }}"
+        alt="{{ drink.drinkTitle }}"
+        class="v-w-size-80"
+      />
+    </div>
+
+    <div class="v-text-center M:v-text-left vega-flex-basis-0 vega-flex-grow">
+      <div class="v-font-h4 v-text-primary">{{ drink.drinkTitle }}</div>
+      <div class="v-font-p2-short v-text-secondary">
+        {{ drink.category }} / {{ drink.alcoholic }}
+      </div>
+    </div>
+
+    <div class="v-text-center M:v-text-left vega-flex-shrink-0 v-min-w-min">
+      <vega-button (click)="onGetDrinkClick()">Get random Cocktail</vega-button>
+    </div>
+  </vega-flex>
+  <h6 class="v-font-h6 v-text-secondary">Ingredients:</h6>
+  <vega-flex alignItem="center" justifyContent="space-around">
+    <app-ingredient
+      *ngFor="let ingredient of drink.fullIngredients"
+      [ingredient]="ingredient"
+    ></app-ingredient>
+  </vega-flex>
+  <h6 class="v-mt-size-20 v-font-h6 v-text-secondary">
+    {{ drink.instruction }}
+  </h6>
+</ng-container>

@@ -1,1 +1,10 @@
-<h1>My App</h1>
+<body>
+  <vega-flex direction="row">
+    <app-side-nav></app-side-nav>
+
+    <div class="v-p-size-32 v-bg-page vega-flex-grow">
+      <router-outlet></router-outlet>
+    </div>
+  </vega-flex>
+  <app-footer></app-footer>
+</body>

@@ -1,0 +1,72 @@
+<vega-flex gap="size-24" direction="col">
+  <vega-flex gap="size-4" direction="col">
+    <div class="v-font-h4 v-text-primary">Self learning app</div>
+    <div class="v-font-h6 v-text-secondary">Using super Vega...</div>
+  </vega-flex>
+
+  <vega-card
+    padding="size-24"
+    class="v-bg-primary dark:v-dark-bg-primary v-rounded-12 hydrated"
+  >
+    <app-drink-item></app-drink-item>
+  </vega-card>
+</vega-flex>
+
+<hr class="v-mb-size-40 v-mt-size-40" />
+<vega-input-select
+  id="my-select"
+  label="Search by Ingredients"
+  [source]="ingredientsList"
+  value="displayName"
+  data-id="id"
+  size="small"
+  placeholder="choose an ingredient"
+  max-height="400"
+  auto-validation="true"
+  (vegaChange)="onSelectChange($event)"
+>
+</vega-input-select>
+
+<div class="v-m-size-20">
+  <vega-flex direction="col" gap="size-12">
+    <vega-table
+      id="basic-table-template111"
+      rowKey="idDrink"
+      [columns]="columns"
+      [dataSource]="dataSource"
+      [pagination]="{ pageSize: 5 }"
+    >
+    </vega-table>
+  </vega-flex>
+</div>
+
+<vega-modal
+  showCloseButton="false"
+  size="600"
+  backdrop="static"
+  [open]="showModal"
+>
+  <div slot="modal-title">{{ drinkItem?.drinkTitle }}</div>
+  <div slot="modal-content">
+    <vega-card>
+      Category: {{ drinkItem?.category }} / {{ drinkItem?.alcoholic }}<br />
+      Glass: {{ drinkItem?.glass }} <br />
+      <br />
+      <h6 class="v-mt-size-20 v-font-h6 v-text-secondary">
+        {{ drinkItem?.instruction }}
+      </h6>
+      <h6 class="v-font-h6 v-text-secondary">Ingredients:</h6>
+      <vega-flex alignItem="center" justifyContent="space-around">
+        <app-ingredient
+          *ngFor="let ingredient of drinkItem?.fullIngredients"
+          [ingredient]="ingredient"
+        ></app-ingredient>
+      </vega-flex>
+    </vega-card>
+  </div>
+  <div slot="modal-footer">
+    <vega-button data-dismiss="modal" (click)="onCloseClick()">
+      Close
+    </vega-button>
+  </div>
+</vega-modal>
